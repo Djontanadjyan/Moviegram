@@ -10,16 +10,16 @@
 
     <style name="LightTheme" parent="AppTheme">
         <item name="textColor">#000000</item>
-        <item name="metaTextColor">#606060</item>
-        <item name="bgColor">#ffffff</item>
-        <item name="abColor">@color/colorPrimaryDark</item>
+        <item name="buttonColor">#BB86FC</item>
+        <item name="bgColor">@color/bgColorLight</item>
+        <item name="elementColor">#FFF</item>
     </style>
 
     <style name="DarkTheme" parent="AppTheme">
-        <item name="textColor">#ffffff</item>
-        <item name="metaTextColor">#aeaeae</item>
-        <item name="bgColor">#000000</item>
-        <item name="abColor">#000000</item>
+        <item name="textColor">#e6f5ff</item>
+        <item name="buttonColor">#834c69</item>
+        <item name="bgColor">@color/bgColorDark</item>
+        <item name="elementColor">#3c4f65</item>
     </style>
 
 </resources>

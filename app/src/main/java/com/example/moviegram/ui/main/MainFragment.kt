@@ -24,6 +24,7 @@ import com.example.moviegram.ui.main.adapter.BaseAdapter
 import com.example.moviegram.ui.main.viewmodel.MainViewModel
 import com.example.moviegram.ui.main.viewmodel.MainViewModelFactory
 import com.example.moviegram.ui.movie.MovieActivity
+import kotlinx.android.synthetic.main.dialog_out.*
 import kotlinx.android.synthetic.main.main_fragment.*
 
 
@@ -40,7 +41,6 @@ class MainFragment : Fragment(), MainNavigator, ShowAlertDialog {
     private lateinit var repository: MovieRepository
     private lateinit var viewModelFactory: MainViewModelFactory
     private lateinit var rvAdapter: BaseAdapter
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -128,12 +128,12 @@ class MainFragment : Fragment(), MainNavigator, ShowAlertDialog {
 
     override fun showAlertDialog() {
         val builder = AlertDialog.Builder(context)
-        builder.setTitle(getString(R.string.exit_alertdialog_title))
-        builder.setMessage(getString(R.string.exit_alerdialog_message))
-        builder.setPositiveButton(getString(R.string.exit_alerdialog_possitivebutton)) { _, _ ->
+        val inflater = activity?.layoutInflater
+        builder.setView(inflater?.inflate(R.layout.dialog_out, null))
+            .setPositiveButton(getString(R.string.exit_alerdialog_possitivebutton)) { _, _ ->
             activity?.finish()
-        }
-        builder.setNegativeButton(getString(R.string.exit_alerdialog_negativebutton)) { _, _ ->
+             }
+            .setNegativeButton(getString(R.string.exit_alerdialog_negativebutton)) { _, _ ->
             return@setNegativeButton
         }
         builder.create()

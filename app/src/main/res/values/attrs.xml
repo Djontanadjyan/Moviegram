@@ -2,6 +2,6 @@
 <resources>
     <attr name="bgColor" format="color"/>
     <attr name="textColor" format="color"/>
-    <attr name="metaTextColor" format="color"/>
-    <attr name="abColor" format="color"/>
+    <attr name="buttonColor" format="color"/>
+    <attr name="elementColor" format="color"/>
 </resources>

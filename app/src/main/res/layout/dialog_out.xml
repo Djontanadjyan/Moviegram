@@ -1,0 +1,47 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_out"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/alertdialog_title"
+        android:layout_width="0dp"
+        android:textAlignment="center"
+        android:layout_height="wrap_content"
+        android:textColor="@color/design_default_color_surface"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/app_name"
+        android:scaleType="center"
+        android:text="@string/exit_alertdialog_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/alertdialog_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/design_default_color_primary_variant"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alertdialog_title"
+        android:text="@string/exit_alerdialog_message" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/alerdialog_buttonYes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/exit_alerdialog_possitivebutton"
+        app:layout_constraintStart_toEndOf="@+id/alertdialog_buttonNo"
+        app:layout_constraintTop_toBottomOf="@+id/alertdialog_message" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/alertdialog_buttonNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="@string/exit_alerdialog_negativebutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alertdialog_message" />
+</androidx.constraintlayout.widget.ConstraintLayout>
