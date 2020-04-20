@@ -1,6 +1,7 @@
 package com.example.moviegram.ui.main.adapter
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,9 +33,11 @@ class BaseAdapter(private val movieList: List<MovieModel> , val onItemClick : Ma
         fun bind(movieModel: MovieModel) {
             itemView.txtView_title.text = movieModel.title
             itemView.imgView_icon.load(movieModel.poster_url)
+            Log.d("Click",  movieModel.id.toString()  + movieModel.enabled.toString())
             itemView.button.setOnClickListener {
                 onItemClick.onItemClick(movieModel)
                 movieModel.enabled = !movieModel.enabled
+                Log.d("Click",  movieModel.id.toString()  + movieModel.enabled.toString())
                 itemView.txtView_title.setTextColor(Color.parseColor("#ff0000"))
             }
             if (movieModel.enabled) {

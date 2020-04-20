@@ -4,4 +4,11 @@
     <string name="movie_edittext_comment">comment</string>
     <string name="movie_checkbox_like">like</string>
     <string name="implicit_text">Send message to friend</string>
+    <string name="item_button_detail">Detail</string>
+    <string name="item_textview_title">Title</string>
+    <string name="exit_alertdialog_title">Finish him</string>
+    <string name="exit_alerdialog_message">You want go out?</string>
+    <string name="exit_alerdialog_possitivebutton">Yes</string>
+    <string name="exit_alerdialog_negativebutton">NO</string>
+    <string name="menu_dark_theme_title">dark_theme</string>
 </resources>

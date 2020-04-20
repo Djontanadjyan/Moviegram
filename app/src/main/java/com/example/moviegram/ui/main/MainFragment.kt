@@ -2,31 +2,32 @@ package com.example.moviegram.ui.main
 
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.moviegram.R
 import com.example.moviegram.data.model.MovieModel
 import com.example.moviegram.data.repositiry.MovieRepository
+import com.example.moviegram.ui.ShowAlertDialog
 import com.example.moviegram.ui.main.adapter.BaseAdapter
 import com.example.moviegram.ui.main.viewmodel.MainViewModel
 import com.example.moviegram.ui.main.viewmodel.MainViewModelFactory
 import com.example.moviegram.ui.movie.MovieActivity
-import com.example.moviegram.ui.movie.MovieFragment
 import kotlinx.android.synthetic.main.main_fragment.*
 
 
-class MainFragment : Fragment() , MainNavigator {
+class MainFragment : Fragment(), MainNavigator, ShowAlertDialog {
 
     private val SECOND_ACTIVITY_REQUEST_CODE = 0
     val MOVIE_KEY = "MOVIE_KEY"
@@ -42,32 +43,29 @@ class MainFragment : Fragment() , MainNavigator {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.d("Fragment", "onCreateView ")
         return inflater.inflate(R.layout.main_fragment, container, false)
 
     }
 
-
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            rv_main.apply {
-                layoutManager = GridLayoutManager(activity, 2)
-                adapter = rvAdapter
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("Fragment", "onCreate ")
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                showAlertDialog()
             }
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            rv_main.apply {
-                layoutManager = LinearLayoutManager(activity)
-                adapter = rvAdapter
-            }
-        }
+        })
     }
-
+    
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        Log.d("Fragment", "onActivityCreated ")
+
         repository = MovieRepository()
         viewModelFactory =
             MainViewModelFactory(
@@ -76,12 +74,21 @@ class MainFragment : Fragment() , MainNavigator {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         rvAdapter = BaseAdapter(viewModel.getMovies().value!!, this)
 
-        rv_main.apply {
-                    layoutManager = LinearLayoutManager(activity)
-                    adapter = rvAdapter
-                }
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
+            rv_main.apply {
+                layoutManager = LinearLayoutManager(activity)
+                adapter = rvAdapter
+            }
+        }
+        else if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
+            rv_main.apply {
+                layoutManager = GridLayoutManager(activity, 2)
+                adapter = rvAdapter
+            }
+        }
 
         fab_main.setOnClickListener {
+
             val textImplicit = "Send to Friend"
             val intentImplicit = Intent()
             intentImplicit.action = Intent.ACTION_SEND
@@ -89,10 +96,11 @@ class MainFragment : Fragment() , MainNavigator {
             intentImplicit.type = "text/plain"
             val chooser = Intent.createChooser(intentImplicit, getString(R.string.implicit_text))
 
-            if (intentImplicit.resolveActivity(activity!!.packageManager) != null){
+            if (intentImplicit.resolveActivity(activity!!.packageManager) != null) {
                 startActivity(chooser)
             }
         }
+
     }
 
     override fun onItemClick(movie: MovieModel) {
@@ -109,10 +117,27 @@ class MainFragment : Fragment() , MainNavigator {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                Log.d("INTENT onActivityResult", data?.getStringExtra("KEY_INTENT_RESULT").toString())
+                Log.d(
+                    "INTENT onActivityResult",
+                    data?.getStringExtra("KEY_INTENT_RESULT").toString()
+                )
 
             }
         }
+    }
+
+    override fun showAlertDialog() {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(getString(R.string.exit_alertdialog_title))
+        builder.setMessage(getString(R.string.exit_alerdialog_message))
+        builder.setPositiveButton(getString(R.string.exit_alerdialog_possitivebutton)) { _, _ ->
+            activity?.finish()
+        }
+        builder.setNegativeButton(getString(R.string.exit_alerdialog_negativebutton)) { _, _ ->
+            return@setNegativeButton
+        }
+        builder.create()
+        builder.show()
     }
 }
 

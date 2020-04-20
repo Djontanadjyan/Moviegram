@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Moviegram</string>
+    <string name="movie_textview_description">Описание</string>
+    <string name="movie_edittext_comment">Комент</string>
+    <string name="movie_checkbox_like">Мне нравиться</string>
+    <string name="implicit_text">Отправь другу</string>
+    <string name="item_button_detail">Детали</string>
+    <string name="item_textview_title">Заголовок</string>
+    <string name="exit_alertdialog_title">Уничтожь его</string>
+    <string name="exit_alerdialog_message">Ты хочешь выйти</string>
+    <string name="exit_alerdialog_possitivebutton">Да</string>
+    <string name="exit_alerdialog_negativebutton">Нет</string>
+</resources>

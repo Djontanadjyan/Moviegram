@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?attr/bgColor"
     android:orientation="horizontal">
 
     <ImageView
@@ -19,7 +20,8 @@
         android:layout_marginTop="8dp"
         android:layout_toEndOf="@+id/imgView_icon"
         android:layout_marginStart="8dp"
-        android:text="Title"
+        android:text="@string/item_textview_title"
+        android:textColor="?attr/textColor"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -30,8 +32,9 @@
         android:layout_below="@+id/txtView_title"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_marginTop="16dp"
+        android:textColor="?attr/metaTextColor"
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/imgView_icon"
-        android:text="Detail"
+        android:text="@string/item_button_detail"
         android:textSize="15sp" />
 </RelativeLayout>
