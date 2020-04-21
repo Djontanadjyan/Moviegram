@@ -13,15 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="?attr/elementColor"
-        app:layout_constraintBottom_toBottomOf="@+id/rv_main"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_send_24dp"
-        android:rotation="325"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

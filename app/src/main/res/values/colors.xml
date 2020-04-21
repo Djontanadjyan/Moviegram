@@ -4,9 +4,21 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
+    //light
     <color name="bgColorLight">#80FFFFFF</color>
+    <color name="elementColorLight">#FFF</color>
+    <color name="buttonColorLight">#BB86FC</color>
+    <color name="textColorLight">#000000</color>
 
+    //dark
     <color name="bgColorDark">#33313b</color>
+    <color name="elementColorDark">#3c4f65</color>
+    <color name="buttonColorDark">#834c69</color>
+    <color name="textColorDark">#e6f5ff</color>
+
+    //alertDialog
+    <color name="dialogButtonText">#834c69</color>
+
 
 
 </resources>

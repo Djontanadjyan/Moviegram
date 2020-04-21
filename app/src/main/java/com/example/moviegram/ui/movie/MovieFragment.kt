@@ -53,7 +53,19 @@ class MovieFragment :Fragment() {
         movie_txt_description.text = arguments?.getParcelable<MovieModel>(MOVIE_KEY)?.description
         movie_image.load(arguments?.getParcelable<MovieModel>(MOVIE_KEY)?.poster_url)
 
+        fab_main.setOnClickListener {
 
+            val textImplicit = "Send to Friend"
+            val intentImplicit = Intent()
+            intentImplicit.action = Intent.ACTION_SEND
+            intentImplicit.putExtra(Intent.EXTRA_TEXT, textImplicit)
+            intentImplicit.type = "text/plain"
+            val chooser = Intent.createChooser(intentImplicit, getString(R.string.implicit_text))
+
+            if (intentImplicit.resolveActivity(activity!!.packageManager) != null) {
+                startActivity(chooser)
+            }
+        }
 
     }
 

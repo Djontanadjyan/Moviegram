@@ -87,20 +87,6 @@ class MainFragment : Fragment(), MainNavigator, ShowAlertDialog {
             }
         }
 
-        fab_main.setOnClickListener {
-
-            val textImplicit = "Send to Friend"
-            val intentImplicit = Intent()
-            intentImplicit.action = Intent.ACTION_SEND
-            intentImplicit.putExtra(Intent.EXTRA_TEXT, textImplicit)
-            intentImplicit.type = "text/plain"
-            val chooser = Intent.createChooser(intentImplicit, getString(R.string.implicit_text))
-
-            if (intentImplicit.resolveActivity(activity!!.packageManager) != null) {
-                startActivity(chooser)
-            }
-        }
-
     }
 
     override fun onItemClick(movie: MovieModel) {
@@ -127,7 +113,7 @@ class MainFragment : Fragment(), MainNavigator, ShowAlertDialog {
     }
 
     override fun showAlertDialog() {
-        val builder = AlertDialog.Builder(context)
+        val builder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
         val inflater = activity?.layoutInflater
         builder.setView(inflater?.inflate(R.layout.dialog_out, null))
             .setPositiveButton(getString(R.string.exit_alerdialog_possitivebutton)) { _, _ ->

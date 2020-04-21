@@ -8,18 +8,26 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="LightTheme" parent="AppTheme">
-        <item name="textColor">#000000</item>
-        <item name="buttonColor">#BB86FC</item>
+    <style name="LightTheme" parent="Theme.MaterialComponents">
+        <item name="textColor">@color/textColorLight</item>
+        <item name="buttonColor">@color/buttonColorLight</item>
         <item name="bgColor">@color/bgColorLight</item>
-        <item name="elementColor">#FFF</item>
+        <item name="elementColor">@color/elementColorLight</item>
     </style>
 
-    <style name="DarkTheme" parent="AppTheme">
-        <item name="textColor">#e6f5ff</item>
-        <item name="buttonColor">#834c69</item>
+    <style name="DarkTheme" parent="Theme.MaterialComponents">
+        <item name="textColor">@color/textColorDark</item>
+        <item name="buttonColor">@color/buttonColorDark</item>
         <item name="bgColor">@color/bgColorDark</item>
-        <item name="elementColor">#3c4f65</item>
+        <item name="elementColor">@color/elementColorDark</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/dialogButtonText</item>
+    </style>
+
+    <style name="fabTheme" parent="Widget.Design.FloatingActionButton">
+        <item name="colorAccent">@color/dialogButtonText</item>
     </style>
 
 </resources>
