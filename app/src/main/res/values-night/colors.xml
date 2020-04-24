@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3c4f65</color>
+    <color name="colorPrimaryDark">#9A33313B</color>
+    <color name="colorPrimaryDarkLight">#9A33313B</color>
+    <color name="colorAccent">#834c69</color>
+
+    //dark
+    <color name="bgColorDark">#232229</color>
+    <color name="elementColorDark">#3c4f65</color>
+    <color name="buttonColorDark">#834c69</color>
+    <color name="primaryTextColorDark">#e6f5ff</color>
+    <color name="secondaryTextColorDark">#e6f5ff</color>
+
+    //alertDialog
+    <color name="dialogButtonText">#834c69</color>
+
+
+
+</resources>

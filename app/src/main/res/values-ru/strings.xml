@@ -10,4 +10,7 @@
     <string name="exit_alerdialog_message">Ты хочешь выйти</string>
     <string name="exit_alerdialog_possitivebutton">Да</string>
     <string name="exit_alerdialog_negativebutton">Нет</string>
+    <string name="menu_dark_theme_title">темная тема</string>
+    <string name="nav_title_home">Фильмы</string>
+    <string name="nav_title_favorite">Избранное</string>
 </resources>

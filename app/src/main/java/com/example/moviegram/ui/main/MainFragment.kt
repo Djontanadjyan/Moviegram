@@ -13,22 +13,25 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviegram.R
-import com.example.moviegram.data.model.MovieModel
+import com.example.moviegram.data.model.Movie
 import com.example.moviegram.data.repositiry.MovieRepository
+import com.example.moviegram.ui.FavoriteClickListener
+import com.example.moviegram.ui.MainNavigator
 import com.example.moviegram.ui.ShowAlertDialog
+import com.example.moviegram.ui.decorator.MovieItemDecorator
 import com.example.moviegram.ui.main.adapter.BaseAdapter
 import com.example.moviegram.ui.main.viewmodel.MainViewModel
 import com.example.moviegram.ui.main.viewmodel.MainViewModelFactory
 import com.example.moviegram.ui.movie.MovieActivity
-import kotlinx.android.synthetic.main.dialog_out.*
 import kotlinx.android.synthetic.main.main_fragment.*
 
 
-class MainFragment : Fragment(), MainNavigator, ShowAlertDialog {
+class MainFragment : Fragment(), MainNavigator, ShowAlertDialog , FavoriteClickListener{
 
     private val SECOND_ACTIVITY_REQUEST_CODE = 0
     val MOVIE_KEY = "MOVIE_KEY"
@@ -37,50 +40,53 @@ class MainFragment : Fragment(), MainNavigator, ShowAlertDialog {
         fun newInstance() = MainFragment()
     }
 
+
     private lateinit var viewModel: MainViewModel
     private lateinit var repository: MovieRepository
     private lateinit var viewModelFactory: MainViewModelFactory
-    private lateinit var rvAdapter: BaseAdapter
+    private var rvAdapter: BaseAdapter = BaseAdapter(this, this)
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        Log.d("Fragment", "onCreateView ")
+        Log.d("bind", "onCreateView ")
         return inflater.inflate(R.layout.main_fragment, container, false)
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("Fragment", "onCreate ")
+        Log.d("bind", "onCreate ")
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 showAlertDialog()
             }
         })
     }
-    
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        Log.d("Fragment", "onActivityCreated ")
+        Log.d("bind", "onActivityCreated ")
 
-        repository = MovieRepository()
+
+        repository = MovieRepository(context!!)
         viewModelFactory =
             MainViewModelFactory(
                 repository
             )
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        rvAdapter = BaseAdapter(viewModel.getMovies().value!!, this)
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
+        initViewModel()
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
             rv_main.apply {
                 layoutManager = LinearLayoutManager(activity)
+                addItemDecoration(MovieItemDecorator(context, 8, 8))
                 adapter = rvAdapter
             }
-        }
-        else if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
+        } else if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             rv_main.apply {
                 layoutManager = GridLayoutManager(activity, 2)
                 adapter = rvAdapter
@@ -89,13 +95,21 @@ class MainFragment : Fragment(), MainNavigator, ShowAlertDialog {
 
     }
 
-    override fun onItemClick(movie: MovieModel) {
+    fun initViewModel(){
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        viewModel.allMovies()
+
+        viewModel.movies.observe(
+            viewLifecycleOwner,
+            Observer { movies -> rvAdapter.setMovies(movies) })
+    }
+
+    override fun onItemClick(movie: Movie) {
         Toast.makeText(context, movie.id.toString(), Toast.LENGTH_LONG).show()
         val intent = Intent(context, MovieActivity::class.java)
         val args: Bundle = Bundle()
         args.putParcelable(MOVIE_KEY, movie)
         intent.putExtra(MOVIE_KEY, args)
-        Log.d("INTENT MainFragment", args.toString())
         startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE)
     }
 
@@ -107,7 +121,6 @@ class MainFragment : Fragment(), MainNavigator, ShowAlertDialog {
                     "INTENT onActivityResult",
                     data?.getStringExtra("KEY_INTENT_RESULT").toString()
                 )
-
             }
         }
     }
@@ -117,13 +130,18 @@ class MainFragment : Fragment(), MainNavigator, ShowAlertDialog {
         val inflater = activity?.layoutInflater
         builder.setView(inflater?.inflate(R.layout.dialog_out, null))
             .setPositiveButton(getString(R.string.exit_alerdialog_possitivebutton)) { _, _ ->
-            activity?.finish()
-             }
+                activity?.finish()
+            }
             .setNegativeButton(getString(R.string.exit_alerdialog_negativebutton)) { _, _ ->
-            return@setNegativeButton
-        }
+                return@setNegativeButton
+            }
         builder.create()
         builder.show()
+    }
+
+    override fun favoriteClick(movie: Movie) {
+        movie.enabled = !movie.enabled
+        viewModel.updateMovies(movie)
     }
 }
 

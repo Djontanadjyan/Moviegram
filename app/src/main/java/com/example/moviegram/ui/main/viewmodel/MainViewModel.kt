@@ -1,29 +1,27 @@
 package com.example.moviegram.ui.main.viewmodel
 
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.moviegram.data.model.MovieModel
+import android.app.Application
+import android.view.View
+import androidx.lifecycle.*
+import com.example.moviegram.data.model.Movie
 import com.example.moviegram.data.repositiry.MovieRepository
-import com.example.moviegram.ui.main.MainNavigator
+import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: MovieRepository) : ViewModel() {
 
-    private val movies: MutableLiveData<List<MovieModel>>  = MutableLiveData(loadUsers())
 
 
-    init {
-        loadUsers()
+    private val _mMovies = MediatorLiveData<List<Movie>>()
+
+    val movies : LiveData<List<Movie>> = _mMovies
+
+    fun allMovies() = viewModelScope.launch {
+        _mMovies.postValue(repository.getAllMovies())
     }
 
-
-    fun getMovies(): LiveData<List<MovieModel>>{
-        return movies
+    fun updateMovies(movie: Movie) = viewModelScope.launch {
+        repository.updateMovies(movie)
     }
-
-    private fun loadUsers() = repository.getAllMovies()
-
-
 
 }

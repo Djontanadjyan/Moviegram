@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/elementColor"
+    android:background="?attr/bgColor"
     android:orientation="horizontal">
 
     <ImageView
@@ -21,21 +21,35 @@
         android:layout_toEndOf="@+id/imgView_icon"
         android:layout_marginStart="8dp"
         android:text="@string/item_textview_title"
-        android:textColor="?attr/textColor"
+        android:textColor="?attr/primaryTextColor"
         android:textSize="20sp"
         android:textStyle="bold" />
 
+
+
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button"
+        android:id="@+id/detail_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtView_title"
-        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_marginTop="16dp"
-        android:textColor="?attr/textColor"
-        android:background="?attr/buttonColor"
         android:layout_marginStart="8dp"
+        android:textColor="?attr/primaryTextColor"
+        android:backgroundTint="?attr/colorAccent"
         android:layout_toEndOf="@+id/imgView_icon"
         android:text="@string/item_button_detail"
         android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/favorite_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:layout_toEndOf="@+id/txtView_title"
+        android:background="@drawable/ic_favorite_border_24dp" />
+
+
+
 </RelativeLayout>

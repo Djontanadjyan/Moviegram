@@ -1,33 +1,25 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryLightDark</item>
+        <item name="colorPrimaryLight">@color/colorPrimaryLightDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
-    <style name="LightTheme" parent="Theme.MaterialComponents">
-        <item name="textColor">@color/textColorLight</item>
-        <item name="buttonColor">@color/buttonColorLight</item>
+    <style name="LightTheme" parent="AppTheme">
+        <item name="primaryTextColor">@color/primaryTextColorLight</item>
         <item name="bgColor">@color/bgColorLight</item>
         <item name="elementColor">@color/elementColorLight</item>
+        <item name="secondaryTextColor">@color/secondaryTextColorLight</item>
     </style>
 
-    <style name="DarkTheme" parent="Theme.MaterialComponents">
-        <item name="textColor">@color/textColorDark</item>
-        <item name="buttonColor">@color/buttonColorDark</item>
-        <item name="bgColor">@color/bgColorDark</item>
-        <item name="elementColor">@color/elementColorDark</item>
-    </style>
-
-    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
         <item name="colorAccent">@color/dialogButtonText</item>
     </style>
 
-    <style name="fabTheme" parent="Widget.Design.FloatingActionButton">
-        <item name="colorAccent">@color/dialogButtonText</item>
-    </style>
 
 </resources>

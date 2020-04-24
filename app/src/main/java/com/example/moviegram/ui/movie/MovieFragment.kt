@@ -10,7 +10,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import coil.api.load
 import com.example.moviegram.R
-import com.example.moviegram.data.model.MovieModel
+import com.example.moviegram.data.model.Movie
 import kotlinx.android.synthetic.main.movie_fragment.*
 
 class MovieFragment :Fragment() {
@@ -50,8 +50,8 @@ class MovieFragment :Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        movie_txt_description.text = arguments?.getParcelable<MovieModel>(MOVIE_KEY)?.description
-        movie_image.load(arguments?.getParcelable<MovieModel>(MOVIE_KEY)?.poster_url)
+        movie_txt_description.text = arguments?.getParcelable<Movie>(MOVIE_KEY)?.description
+        movie_image.load(arguments?.getParcelable<Movie>(MOVIE_KEY)?.poster_url)
 
         fab_main.setOnClickListener {
 
