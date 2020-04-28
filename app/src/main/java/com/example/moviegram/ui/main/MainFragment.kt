@@ -23,15 +23,17 @@ import com.example.moviegram.data.repositiry.MovieRepository
 import com.example.moviegram.ui.FavoriteClickListener
 import com.example.moviegram.ui.MainNavigator
 import com.example.moviegram.ui.ShowAlertDialog
+import com.example.moviegram.ui.SnackHandler
 import com.example.moviegram.ui.decorator.MovieItemDecorator
 import com.example.moviegram.ui.main.adapter.BaseAdapter
 import com.example.moviegram.ui.main.viewmodel.MainViewModel
 import com.example.moviegram.ui.main.viewmodel.MainViewModelFactory
 import com.example.moviegram.ui.movie.MovieActivity
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.main_fragment.*
 
 
-class MainFragment : Fragment(), MainNavigator, ShowAlertDialog , FavoriteClickListener{
+class MainFragment : Fragment(), MainNavigator, ShowAlertDialog , FavoriteClickListener {
 
     private val SECOND_ACTIVITY_REQUEST_CODE = 0
     val MOVIE_KEY = "MOVIE_KEY"
@@ -54,8 +56,9 @@ class MainFragment : Fragment(), MainNavigator, ShowAlertDialog , FavoriteClickL
     ): View {
         Log.d("bind", "onCreateView ")
         return inflater.inflate(R.layout.main_fragment, container, false)
-
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,7 +98,7 @@ class MainFragment : Fragment(), MainNavigator, ShowAlertDialog , FavoriteClickL
 
     }
 
-    fun initViewModel(){
+    private fun initViewModel() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         viewModel.allMovies()
 
@@ -117,6 +120,7 @@ class MainFragment : Fragment(), MainNavigator, ShowAlertDialog , FavoriteClickL
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
+                initViewModel()
                 Log.d(
                     "INTENT onActivityResult",
                     data?.getStringExtra("KEY_INTENT_RESULT").toString()
@@ -140,8 +144,13 @@ class MainFragment : Fragment(), MainNavigator, ShowAlertDialog , FavoriteClickL
     }
 
     override fun favoriteClick(movie: Movie) {
-        movie.enabled = !movie.enabled
+
+        movie.enabled  = !movie.enabled
         viewModel.updateMovies(movie)
+
     }
+
 }
+
+
 

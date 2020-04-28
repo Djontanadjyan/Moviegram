@@ -16,6 +16,8 @@ interface MovieDao {
     @Query("SELECT * FROM movies WHERE favorites =1")
     suspend fun getAllFavoritesMovies(): List<Movie>
 
+    @Query("SELECT * FROM movies WHERE id = :id")
+    fun getMovie(id: Int?): LiveData<Movie>
     @Delete
     suspend fun delete(movie: Movie)
 

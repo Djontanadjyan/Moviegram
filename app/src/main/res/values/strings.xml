@@ -13,4 +13,6 @@
     <string name="menu_dark_theme_title">dark_theme</string>
     <string name="nav_title_home">Home</string>
     <string name="nav_title_favorite">Favorite</string>
+    <string name="snackBar_text">Added to Favorites</string>
+    <string name="snackbar_actinon">Undo</string>
 </resources>

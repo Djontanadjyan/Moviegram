@@ -1,6 +1,5 @@
 package com.example.moviegram.data.repositiry
 
-import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -30,6 +29,9 @@ class MovieRepository(context: Context): CoroutineScope {
     suspend fun getAllMovies(): List<Movie>? = movieDao?.getAllMovies()
 
     suspend fun getAllFavoriteMovies(): List<Movie>? = movieDao?.getAllFavoritesMovies()
+
+    fun getMovie(id: Int) : LiveData<Movie>? = movieDao?.getMovie(id)
+
 
     private suspend fun insertAllMoviesBG() {
         withContext(Dispatchers.IO) {
